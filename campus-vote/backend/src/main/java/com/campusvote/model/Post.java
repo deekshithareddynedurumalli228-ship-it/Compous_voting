@@ -1,0 +1,3 @@
+package com.campusvote.model;
+import jakarta.persistence.*; import java.util.*;
+@Entity @Table(name="posts") public class Post { @Id @GeneratedValue(strategy=GenerationType.IDENTITY) Long id; String name; @ManyToOne(fetch=FetchType.LAZY) Election election; @OneToMany(mappedBy="post",cascade=CascadeType.ALL,orphanRemoval=true) List<Candidate> candidates=new ArrayList<>(); public Post(){} public Long getId(){return id;} public String getName(){return name;} public void setName(String x){name=x;} public Election getElection(){return election;} public void setElection(Election x){election=x;} public List<Candidate> getCandidates(){return candidates;} }

@@ -1,0 +1,7 @@
+package com.campusvote.controller;
+import com.campusvote.dto.*; import com.campusvote.service.ElectionService; import org.springframework.web.bind.annotation.*; import java.util.*;
+@RestController @RequestMapping("/api") public class ApiController { final ElectionService s; public ApiController(ElectionService s){this.s=s;}
+ @PostMapping("/auth/login") public Map<String,Object> login(@RequestBody LoginRequest q){return s.login(q);} @GetMapping("/elections") public List<Map<String,Object>> all(){return s.all();} @GetMapping("/elections/{id}") public Map<String,Object> one(@PathVariable Long id){return s.one(id);}
+ @PostMapping("/admin/elections") public Object create(@RequestBody CreateElectionRequest q){return s.create(q);} @PostMapping("/admin/posts/{postId}/candidates") public Object candidate(@PathVariable Long postId,@RequestBody AddCandidateRequest q){return s.addCandidate(postId,q);}
+ @PostMapping("/votes") public Map<String,String> vote(@RequestBody VoteRequest q){s.vote(q);return Map.of("message","Vote recorded successfully");} @GetMapping("/elections/{eid}/status/{sid}") public Map<String,Object> status(@PathVariable Long eid,@PathVariable Long sid){return s.status(eid,sid);} @GetMapping("/elections/{id}/results") public Object results(@PathVariable Long id){return s.results(id);}
+ @ExceptionHandler(RuntimeException.class) @ResponseStatus(org.springframework.http.HttpStatus.BAD_REQUEST) public Map<String,String> error(RuntimeException e){return Map.of("message",e.getMessage());}}

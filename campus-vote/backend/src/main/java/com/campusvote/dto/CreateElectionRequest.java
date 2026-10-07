@@ -1,1 +1,0 @@
-package com.campusvote.dto; import java.time.LocalDateTime; import java.util.List; public record CreateElectionRequest(String title,String description,LocalDateTime startTime,LocalDateTime endTime,List<String> posts){}

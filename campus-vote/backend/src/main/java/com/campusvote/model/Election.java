@@ -1,4 +1,0 @@
-package com.campusvote.model;
-import jakarta.persistence.*; import java.time.LocalDateTime; import java.util.*;
-@Entity @Table(name="elections") public class Election { @Id @GeneratedValue(strategy=GenerationType.IDENTITY) Long id; String title; String description; LocalDateTime startTime,endTime;
- @OneToMany(mappedBy="election",cascade=CascadeType.ALL,orphanRemoval=true) List<Post> posts=new ArrayList<>(); public Election(){} public Long getId(){return id;} public String getTitle(){return title;} public void setTitle(String x){title=x;} public String getDescription(){return description;} public void setDescription(String x){description=x;} public LocalDateTime getStartTime(){return startTime;} public void setStartTime(LocalDateTime x){startTime=x;} public LocalDateTime getEndTime(){return endTime;} public void setEndTime(LocalDateTime x){endTime=x;} public List<Post> getPosts(){return posts;}}
